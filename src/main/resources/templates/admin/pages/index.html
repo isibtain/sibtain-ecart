@@ -7,13 +7,19 @@
     <nav th:replace="fragments/nav  :: nav-admin"></nav>
 
     <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col">
-                <h1>Admin Pages</h1></div>
+
+        <h1 class = "display-2">Pages</h1>
+        <a href="/admin/pages/add" class="btn btn-primary">Add new</a>
+
+        <div th:if="${!pages.empty}">
+            <p>There are pages</p>
         </div>
 
-    </div> <!-- /container -->
+        <div th:unless="${!pages.empty}">
+            <p>There are NO pages</p>
+        </div>
+
+    </div>
 
     <div  th:replace="fragments/footer"></div>
 
