@@ -2,9 +2,11 @@ package com.sibtain.supercms.controllers;
 
 import com.sibtain.supercms.models.PageRepository;
 import com.sibtain.supercms.models.data.Page;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -26,5 +28,12 @@ public class AdminPagesController {
         model.addAttribute("pages",pages);
         return "admin/pages/index";
 
+    }
+
+    @GetMapping("/add")
+    public String add(@ModelAttribute Page page){
+//        model.addAttribute("page", new Page());
+
+        return "admin/pages/add";
     }
 }
