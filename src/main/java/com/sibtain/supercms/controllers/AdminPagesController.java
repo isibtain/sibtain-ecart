@@ -26,7 +26,7 @@ public class AdminPagesController {
 
     @GetMapping
     public String check(Model model){
-        List<Page> pages = pageRepo.findAll();
+        List<Page> pages = pageRepo.findAllByOrderBySorting();
         model.addAttribute("pages",pages);
         return "admin/pages/index";
     }
@@ -93,7 +93,7 @@ public class AdminPagesController {
 
         String slug = page.getSlug() == "" ? page.getTitle().toLowerCase().replace(" ", "-") : page.getSlug().toLowerCase().replace(" ", "-");
 
-        Page slugExists = pageRepo.findBySlug(page.getId(), slug);
+        Page slugExists = pageRepo.findBySlugAndIdNot(slug,page.getId());
 
         if ( slugExists != null ) {
             redirectAttributes.addFlashAttribute("message", "Slug exists, choose another");
@@ -106,6 +106,32 @@ public class AdminPagesController {
         }
 
         return "redirect:/admin/pages/edit/"+page.getId();
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id, RedirectAttributes redirectAttributes){
+
+        pageRepo.deleteById(id);
+        redirectAttributes.addFlashAttribute("message", "Page deleted, choose another");
+        redirectAttributes.addFlashAttribute("alertClass", "alert-success");
+        return "redirect:/admin/pages";
+    }
+
+    @PostMapping("/reorder")
+    public @ResponseBody String reorder(@RequestParam("id[]")  int[] id ){
+
+        int count =1;
+
+        Page page;
+
+        for (int pageId: id){
+            page= pageRepo.getOne(pageId);
+            page.setSorting(count);
+            pageRepo.save(page);
+            count++;
+        }
+
+        return "ok";
     }
 
 
