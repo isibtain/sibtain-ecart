@@ -28,7 +28,9 @@
 
                 <tr th:each="product: ${products}">
                     <td th:text="${product.name}"></td>
-                    <td th:text="${product.image}"></td>
+                    <td>
+                        <img style="width: 100px;" th:src="@{'/media/' + ${product.image}}" alt="" >
+                    </td>
                     <td th:text="${product.categoryId}"></td>
                     <td th:text="${product.price}"></td>
                     <td><a th:href="@{'/admin/products/edit/' + ${product.id}}" >Edit</a></td>

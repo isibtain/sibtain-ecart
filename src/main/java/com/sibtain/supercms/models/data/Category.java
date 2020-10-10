@@ -12,7 +12,7 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id=1;
 
     @Size(min = 2,message = "Name must be atleast 2 characters long")
     private String name;

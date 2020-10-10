@@ -16,7 +16,7 @@ public class Product {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id=1;
 
     @Size(min=2,message = "Title must be atleast 2 characters")
     private String name;
