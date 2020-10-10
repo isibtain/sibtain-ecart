@@ -12,10 +12,10 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("first");
     }
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry
-//                .addResourceHandler("/media/**")
-//                .addResourceLocations("/media/");
-//    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry
+                .addResourceHandler("/media/**")
+                .addResourceLocations("/media/");
+    }
 }
