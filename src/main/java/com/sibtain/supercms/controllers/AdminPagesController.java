@@ -112,7 +112,7 @@ public class AdminPagesController {
     public String delete(@PathVariable int id, RedirectAttributes redirectAttributes){
 
         pageRepo.deleteById(id);
-        redirectAttributes.addFlashAttribute("message", "Page deleted, choose another");
+        redirectAttributes.addFlashAttribute("message", "Page deleted");
         redirectAttributes.addFlashAttribute("alertClass", "alert-success");
         return "redirect:/admin/pages";
     }
