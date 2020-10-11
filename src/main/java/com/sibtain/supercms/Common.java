@@ -60,7 +60,6 @@ public class Common {
         model.addAttribute("ccategories", categories);
         model.addAttribute("cartActive", cartActive);
 
-
     }
 
 
