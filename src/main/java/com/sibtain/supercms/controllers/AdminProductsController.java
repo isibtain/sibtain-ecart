@@ -3,9 +3,11 @@ package com.sibtain.supercms.controllers;
 import com.sibtain.supercms.models.CategoryRepository;
 import com.sibtain.supercms.models.ProductRepository;
 import com.sibtain.supercms.models.data.Category;
-import com.sibtain.supercms.models.data.Page;
 import com.sibtain.supercms.models.data.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,8 +36,15 @@ public class AdminProductsController {
 
 
     @GetMapping
-    public String index(Model model){
-     List<Product> products = productRepository.findAll();
+    public String index(Model model, @RequestParam(value = "page", required = false) Integer p){
+
+        int perPage = 3;
+        int page = (p!=null)? p:0;
+
+        Pageable pageable = PageRequest.of(page,perPage);
+
+        Page<Product> products = productRepository.findAll(pageable);
+
      model.addAttribute("products",products);
 
         List<Category> categories = categoryRepository.findAll();
@@ -47,6 +56,14 @@ public class AdminProductsController {
         }
 
         model.addAttribute("cats",cats);
+
+        Long count = productRepository.count();
+        double pageCount = Math.ceil( (double) count/  (double)perPage  );
+
+        model.addAttribute("pageCount", (int) pageCount );
+        model.addAttribute("perPage", perPage );
+        model.addAttribute("count", count );
+        model.addAttribute("page", page );
 
      return "admin/products/index";
     }

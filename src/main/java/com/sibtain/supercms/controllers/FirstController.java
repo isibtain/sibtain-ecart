@@ -8,6 +8,6 @@ public class FirstController {
 
     @RequestMapping("/")
     public String first(){
-        return "first";
+        return "page";
     }
 }
