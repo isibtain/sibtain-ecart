@@ -16,8 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/media/**")
-                //.addResourceLocations("classpath:/static/media/");
-                .addResourceLocations("file:/C:/Users/sibta/Desktop/BestCMS/src/main/resources/static/media/");
+                .addResourceLocations("classpath:/static/media/");
+                //.addResourceLocations("file:/C:/Users/sibta/Desktop/BestCMS/src/main/resources/static/media/");
 
 
     }
